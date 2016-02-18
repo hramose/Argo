@@ -2,17 +2,22 @@
 
 namespace App\Models;
 
+use Zizaco\Entrust\Traits\EntrustUserTrait; # Requerido por Entrust
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+	use EntrustUserTrait; # Requerido por Entrust
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'email', 'password',
+		'name'
+		,'username'
+		,'email'
+		,'password',
     ];
 
     /**
@@ -21,6 +26,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+		'password'
+		,'created_at'
+		,'updated_at'
     ];
 }

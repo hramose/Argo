@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "235ddebafa79dafc229fd1f7d53fb486",
-    "content-hash": "f9e9af86270318f711ce21a0da417cec",
+    "hash": "658fcff8e6e7834de2f614f8059e2fe7",
+    "content-hash": "7009771aadac0ac84b75be722d439e2e",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -308,16 +308,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.2.16",
+            "version": "v5.2.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "39e89553c124dce266da03ee3c0260bdd62f1848"
+                "reference": "0eb6a77aa12b305300a2483778edcf4c7086cb78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/39e89553c124dce266da03ee3c0260bdd62f1848",
-                "reference": "39e89553c124dce266da03ee3c0260bdd62f1848",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/0eb6a77aa12b305300a2483778edcf4c7086cb78",
+                "reference": "0eb6a77aa12b305300a2483778edcf4c7086cb78",
                 "shasum": ""
             },
             "require": {
@@ -432,7 +432,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2016-02-15 17:46:58"
+            "time": "2016-02-17 19:33:49"
         },
         {
             "name": "league/flysystem",
@@ -1875,16 +1875,16 @@
         },
         {
             "name": "tymon/jwt-auth",
-            "version": "0.5.7",
+            "version": "0.5.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tymondesigns/jwt-auth.git",
-                "reference": "638807edc8a383644a5c14b2105b7717101c0b6a"
+                "reference": "18b2add90de2315d549664b4d4a062db07e8b080"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tymondesigns/jwt-auth/zipball/638807edc8a383644a5c14b2105b7717101c0b6a",
-                "reference": "638807edc8a383644a5c14b2105b7717101c0b6a",
+                "url": "https://api.github.com/repos/tymondesigns/jwt-auth/zipball/18b2add90de2315d549664b4d4a062db07e8b080",
+                "reference": "18b2add90de2315d549664b4d4a062db07e8b080",
                 "shasum": ""
             },
             "require": {
@@ -1934,7 +1934,7 @@
                 "laravel",
                 "tymon"
             ],
-            "time": "2016-02-16 20:08:47"
+            "time": "2016-02-18 09:22:36"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -1986,6 +1986,74 @@
                 "environment"
             ],
             "time": "2015-12-29 15:10:30"
+        },
+        {
+            "name": "zizaco/entrust",
+            "version": "5.2.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Zizaco/entrust.git",
+                "reference": "ffd8eb173b34e675b0f9fcca9d46a7748f0c0f7c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Zizaco/entrust/zipball/ffd8eb173b34e675b0f9fcca9d46a7748f0c0f7c",
+                "reference": "ffd8eb173b34e675b0f9fcca9d46a7748f0c0f7c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/cache": "~5.0",
+                "illuminate/console": "~5.0",
+                "illuminate/support": "~5.0",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "illuminate/database": "~5.0",
+                "mockery/mockery": "dev-master",
+                "phpunit/phpunit": "~4.1",
+                "sami/sami": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/commands"
+                ],
+                "psr-4": {
+                    "Zizaco\\Entrust\\": "src/Entrust/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrew Elkins",
+                    "homepage": "http://andrewelkins.com"
+                },
+                {
+                    "name": "Zizaco Zizuini",
+                    "email": "zizaco@gmail.com"
+                },
+                {
+                    "name": "Ben Batschelet",
+                    "homepage": "http://github.com/bbatsche"
+                },
+                {
+                    "name": "Michele Angioni",
+                    "email": "michele.angioni@gmail.com"
+                }
+            ],
+            "description": "This package provides a flexible way to add Role-based Permissions to Laravel",
+            "keywords": [
+                "acl",
+                "auth",
+                "illuminate",
+                "laravel",
+                "permission",
+                "roles"
+            ],
+            "time": "2016-01-06 19:02:40"
         }
     ],
     "packages-dev": [
@@ -3216,7 +3284,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "zizaco/entrust": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

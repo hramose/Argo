@@ -150,6 +150,8 @@ return [
 
 		//JWT-Auth
 		Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+		//Entrust
+		Zizaco\Entrust\EntrustServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -208,6 +210,8 @@ return [
 		//JWT-Auth
 		'JWTAuth'   => Tymon\JWTAuth\Facades\JWTAuth::class,
 		'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+		//Entrust
+		'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
     ],
 
 ];
