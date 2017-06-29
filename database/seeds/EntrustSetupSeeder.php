@@ -29,13 +29,13 @@ class EntrustSetupSeeder extends Seeder
 			)
 		);
 
-		\DB::table('permission_role')->insert(array(
+		\DB::table('permission_roles')->insert(array(
 				'permission_id'=>1,
 				'role_id'=>1,
 			)
 		);
 
-		\DB::table('role_user')->insert(array(
+		\DB::table('role_users')->insert(array(
 				'user_id'=>1,
 				'role_id'=>1,
 			)

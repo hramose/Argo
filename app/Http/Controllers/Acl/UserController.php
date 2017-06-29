@@ -3,8 +3,9 @@
 use Validator;
 use App\Models\User;
 use App\Models\Role;
-use App\Models\Role_user;
 use App\Models\Permission;
+use App\Models\RoleUser;
+use App\Models\PermissionRole;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -55,13 +56,11 @@ class UserController extends Controller {
         }
 
 		$user = new User();
-		$user->name		= $data['name'];
-		$user->username	= $data['username'];
-		$user->email	= $data['email'];
-		$user->password	= bcrypt($data['password']);
-		$user->state	= $data['state'];
-		$user->new		= $data['new'];
-		$user->ldap		= $data['ldap'];
+		foreach ($data as $key => $value){
+			if($key!="id" and $key!='token'){
+				$user->$key = $data[$key];
+			}
+		}
 		$user->save();
 
 		return response()->json([
@@ -130,21 +129,22 @@ class UserController extends Controller {
 			'ldap' => 'boolean',
         ]);
         if ($validator->fails()) {
+		$validator->messages();
 			return response()->json([
 					"msg"=>"alert",
 					"validator"=>$validator->messages(),
 				],200
 			);
         }
+		//var_dump($data);
 
 		if ($user=User::find($id)){
-			$user->name		= $data['name'];
-			$user->username	= $data['username'];
-			$user->email	= $data['email'];
-			$user->password	= bcrypt($data['password']);
-			$user->state	= $data['state'];
-			$user->new		= $data['new'];
-			$user->ldap		= $data['ldap'];
+
+			foreach ($data as $key => $value){
+				if($key!="id" and $key!='token'){
+					$user->$key = $data[$key];
+				}
+			}
 			$user->save();
 			return response()->json([
 					"msg"=>"success",
@@ -161,19 +161,16 @@ class UserController extends Controller {
 	}
 
 	/**
-	 * Enlaza un usuario a un rol
+	 * Elimina un usuario especifico
 	 *
-	 * @param  int  $user_id
-	 * @param  int  $role_id
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function attach($user_id,$role_id)
+	public function delete($id)
 	{
-		$data["user_id"]=$user_id;
-		$data["role_id"]=$role_id;
+		$data["id"]=$id;
         $validator = Validator::make($data, [
-			'role_id' => 'integer',
-			'user_id' => 'integer',
+			'id' => 'integer',
         ]);
         if ($validator->fails()) {
 			return response()->json([
@@ -182,78 +179,19 @@ class UserController extends Controller {
 				],200
 			);
         }
-		if ($user=User::find($user_id)){
-			if ($role=Role::find($role_id)){
-				$role_user=Role_user::where('role_id',$role_id)
-												->where('user_id',$user_id)
-												->first();
-				if (!$role_user){
-					$user->attachRole($role);
-					return response()->json([
-							"msg"=>"Success"
-						],200
-					);
-				}else{
-					$description = "La relacion entre el usuario y el rol ya existe";
-				}
-			}else{
-				$description="No se ha encontrado el rol";
-			}
-		}else{
-			$description="No se ha encontrado el usuario";
-		}
-		return response()->json([
-				"msg"=>"error",
-				"description"=>$description,
-			],200
-		);
-	}
-
-	/**
-	 * Rompe enlace entre un usuario y un rol
-	 *
-	 * @param  int  $role_id
-	 * @param  int  $user_id
-	 * @return Response
-	 */
-	public function detach($user_id,$role_id)
-	{
-		$data["user_id"]=$user_id;
-		$data["role_id"]=$role_id;
-        $validator = Validator::make($data, [
-			'user_id' => 'integer',
-			'role_id' => 'integer',
-        ]);
-        if ($validator->fails()) {
+		if ($user=User::find($id)){
+			$role=User::destroy($id);
 			return response()->json([
-					"msg"=>"alert",
-					"validator"=>$validator->messages(),
+					"msg"=>"Success"
 				],200
 			);
-        }
-		if ($user=User::find($user_id)){
-			if ($role=Role::find($role_id)){
-				if ($role_user=Role_user::where('role_id',$role_id)
-												->where('user_id',$user_id)
-												->delete()){
-					return response()->json([
-							"msg"=>"Success"
-						],200
-					);
-				}else{
-					$description = "La relacion entre el usuario y el rol no existe";
-				}
-			}else{
-				$description="No se ha encontrado el rol";
-			}
 		}else{
-			$description="No se ha encontrado el usuario";
+			return response()->json([
+					"msg"=>"error",
+					"description"=>"No se ha encontrado el usuario"
+				],200
+			);
 		}
-		return response()->json([
-				"msg"=>"error",
-				"description"=>$description,
-			],200
-		);
 	}
 
 	/**
@@ -276,15 +214,13 @@ class UserController extends Controller {
 			);
         }
 		if ($role=User::find($id)){
-			$role_user=Role_user::leftjoin('users','role_user.user_id','=','users.id')
-							->leftjoin('roles','roles.id','=','role_user.user_id')
-							->where('user_id',$id)
-							->get(['roles.name','username','email']);
-			
+			$role_user=RoleUser::leftjoin('roles','roles.id','=','role_users.role_id')
+				->where('role_users.user_id',$id)
+							->get(['name']);
 			if ($role_user and current(current($role_user))){
 				return response()->json([
-						"msg"=>"Success",
-						"users" => $role_user,
+						"msg"=>"success",
+						"roles" => $role_user,
 					],200
 				);
 			}else{
@@ -319,17 +255,15 @@ class UserController extends Controller {
 				],200
 			);
         }
-		if ($role=Role::find($id)){
-			$role_user=Role_user::leftjoin('users','role_user.user_id','=','users.id')
-							->leftjoin('permission_role','permission_role.role_id','=','role_user.role_id')
-							->leftjoin('permissions','permissions.id','=','permission_role.permission_id')
-							->where('user_id',$id)
-							->get(['name','username','email']);
-			
+		if ($role=User::find($id)){
+			$role_user=RoleUser::leftjoin('permission_roles','permission_roles.role_id','=','role_users.role_id')
+				->leftjoin('permissions','permissions.id','=','permission_roles.permission_id')
+				->where('role_users.user_id',$id)
+							->get(['name']);
 			if ($role_user and current(current($role_user))){
 				return response()->json([
-						"msg"=>"Success",
-						"users" => $role_user,
+						"msg"=>"success",
+						"permissions" => $role_user,
 					],200
 				);
 			}else{
