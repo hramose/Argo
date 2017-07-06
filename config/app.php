@@ -160,6 +160,10 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+		/*
+		 * LaravelModules
+		 */
+		Nwidart\Modules\LaravelModulesServiceProvider::class,
 
     ],
 
@@ -212,6 +216,8 @@ return [
 		'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
 		//Entrust
 		'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+		//Modules
+		'Module' => Nwidart\Modules\Facades\Module::class,
     ],
 
 ];
