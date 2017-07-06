@@ -1,0 +1,3 @@
+[submodule "Modules/Ecommerce"]
+	path = Modules/Ecommerce
+	url = https://github.com/whoOami/Ecommerce.git
