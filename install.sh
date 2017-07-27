@@ -56,3 +56,4 @@ if grep 'Arch Linux' /etc/issue > /dev/null; then
 else
 	sudo service apache2 restart
 fi;
+git submodule update --init --recursive
