@@ -1,3 +1,6 @@
 [submodule "Modules/Ecommerce"]
 	path = Modules/Ecommerce
 	url = https://github.com/whoOami/Ecommerce.git
+[submodule "Modules/Documents"]
+	path = Modules/Documents
+	url = git@git.correlibre.org:who/documents.git
