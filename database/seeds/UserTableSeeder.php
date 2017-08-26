@@ -17,7 +17,6 @@ class UserTableSeeder extends Seeder
 				'username' => 'admon', 
 				'email' => 'admon@whooami.me', 
 				'password' => Hash::make('secret'), 
-				'identification_number'=>'10000000000',
 				'birthdate'=>'1990-01-01'
 			],
         );
@@ -28,7 +27,6 @@ class UserTableSeeder extends Seeder
 					'email'=>$user['email'],
 					'password'=>$user['password'],
 					'password'=>$user['password'],
-					'identification_number'=>$user['identification_number'],
 					'birthdate'=>$user['birthdate'],
 					'created_at'=>date("Y-m-y H:i:s"),
 					'updated_at'=>date("Y-m-y H:i:s"),
