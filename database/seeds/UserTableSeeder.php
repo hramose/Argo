@@ -13,28 +13,12 @@ class UserTableSeeder extends Seeder
     {
         $users = array(
 			[
-				'name' => 'admon', 
-				'username' => 'who', 
-				'email' => 'who@whooami.me', 
+				'name' => 'administrador', 
+				'username' => 'admon', 
+				'email' => 'admon@whooami.me', 
 				'password' => Hash::make('secret'), 
-				'identification_number'=>'10101010',
-				'birthdate'=>'1996-01-01'
-			],
-			[
-				'name' => 'jefe',
-				'username' => 'boss',
-				'email' => 'cejebuto@gmail.com',
-				'password' => Hash::make('secret'),
-				'identification_number'=>'20202020',
-				'birthdate'=>'1989-01-01'
-			],
-			[
-				'name' => 'pruebas',
-				'username' => 'tests',
-				'email' => 'whotezts@gmail.com',
-				'password' => Hash::make('secret'),
-				'identification_number'=>'30303030',
-				'birthdate'=>'1979-01-01'
+				'identification_number'=>'10000000000',
+				'birthdate'=>'1990-01-01'
 			],
         );
 		foreach($users as $user){
