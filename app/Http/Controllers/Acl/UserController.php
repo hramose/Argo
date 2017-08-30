@@ -39,12 +39,12 @@ class UserController extends Controller {
 		}
         $validator = Validator::make($data, [
             'name' => 'required|between:4,30|alpha|unique:users',
+            'lastname' => 'between:4,30|alpha',
+            'phone' => 'between:4,10|alpha',
             'username' => 'required|between:3,10|alpha_dash|unique:users',
 			'email' => 'required|email|between:5,200|unique:users',
 			'password' => 'required|alpha_dash|min:8',
-			'state' => 'required|boolean',
-			'new' => 'required|boolean',
-			'ldap' => 'required|boolean',
+            'birthdate' => 'required|date',
         ]);
 
         if ($validator->fails()) {
@@ -58,7 +58,11 @@ class UserController extends Controller {
 		$user = new User();
 		foreach ($data as $key => $value){
 			if($key!="id" and $key!='token'){
-				$user->$key = $data[$key];
+				if($key=="password"){
+					$user->$key = bcrypt($data[$key]);
+				}else{
+					$user->$key = $data[$key];
+				}
 			}
 		}
 		$user->save();

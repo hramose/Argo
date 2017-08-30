@@ -13,6 +13,7 @@
 
 Route::get('/', 'HomeController@index'); 
 
+Route::post('auth/signup', 'Acl\UserController@create');
 Route::post('auth/login', 'Auth\AuthController@authenticate');
 
 /*
