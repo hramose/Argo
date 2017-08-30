@@ -1,0 +1,21 @@
+{
+  "name": "Argo",
+  "homepage": "https://github.com/whoOami/Argo",
+  "authors": [
+    "who <who@whooami.me>"
+  ],
+  "description": "Framework A framework within another framework",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "assets",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

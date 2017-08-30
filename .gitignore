@@ -8,3 +8,6 @@ Homestead.json
 # Vim
 .*.swp
 .*.swo
+
+#bower
+public/assets/
