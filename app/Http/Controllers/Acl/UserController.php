@@ -40,20 +40,21 @@ class UserController extends Controller {
         $validator = Validator::make($data, [
             'name' => 'required|between:4,30|alpha|unique:users',
             'lastname' => 'between:4,30|alpha',
-            'phone' => 'between:4,10|alpha',
+            'phone' => 'numeric',
             'username' => 'required|between:3,10|alpha_dash|unique:users',
 			'email' => 'required|email|between:5,200|unique:users',
 			'password' => 'required|alpha_dash|min:8',
-            'birthdate' => 'required|date',
+            'birthdate' => 'date',
         ]);
-
-        if ($validator->fails()) {
+        if ($validator->fails() or $data["password"]!=$data["confirm"]) {
 			return response()->json([
 					"msg"=>"alert",
 					"validator"=>$validator->messages(),
 				],200
 			);
-        }
+		}else{
+			unset($data["confirm"]);
+		}
 
 		$user = new User();
 		foreach ($data as $key => $value){
@@ -67,11 +68,12 @@ class UserController extends Controller {
 		}
 		$user->save();
 
-		return response()->json([
+        return view('pawfinders::index');
+		/*return response()->json([
 				"msg"=>"success",
 				"id"=>$user->id,
 			],200
-		);
+		);*/
 	}
 
 	/**
