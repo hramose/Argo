@@ -2,7 +2,7 @@ if grep 'Arch Linux' /etc/issue > /dev/null; then
 	sudo pacman -S apache php php-apache yaourt php-cli php-curl php-imap php-json php-mcrypt php-pgsql php-sqlite php-xdebug
 	yaourt -S a2enmod-git
 else 
-	sudo apt-get install php5 php5-cli php5-curl php5-imap php5-json php5-mcrypt php5-pgsql php5-sqlite php5-xdebug 	
+	sudo apt-get install php php-cli php-curl php-imap php-json php-mcrypt php-pgsql php-sqlite php-xdebug 	
 fi;
 if [ -f /usr/bin/composer ] || [ -f /usr/local/bin/composer ]; then
 	echo "Actualizando dependencias."

@@ -68,12 +68,12 @@ class UserController extends Controller {
 		}
 		$user->save();
 
-        return view('pawfinders::index');
-		/*return response()->json([
+        //return view('pawfinders::index');
+		return response()->json([
 				"msg"=>"success",
 				"id"=>$user->id,
 			],200
-		);*/
+		);
 	}
 
 	/**
