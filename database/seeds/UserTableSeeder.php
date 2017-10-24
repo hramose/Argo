@@ -13,9 +13,9 @@ class UserTableSeeder extends Seeder
     {
         $users = array(
 			[
-				'name' => 'administrador', 
-				'username' => 'admon', 
-				'email' => 'admon@whooami.me', 
+				'name' => 'Administrador', 
+				'username' => 'who', 
+				'email' => 'who@pawfinders.me', 
 				'password' => Hash::make('secret'), 
 				'birthdate'=>'1990-01-01'
 			],
