@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password', 60);
 			$table->date('birthdate')->nullable();
             $table->boolean('state')->default('t');
+            $table->string('token')->unique()->nullable();
             $table->timestamps();
         });
     }

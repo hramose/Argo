@@ -60,5 +60,11 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 		#RoleUser
 		Route::post('role/{role_id}/user/{user_id}', 'RoleController@attach_user');#Enlaza un usuario a un rol.
 		Route::delete('role/{role_id}/user/{user_id}', 'RoleController@detach_user');#Rompe enlace entre un usuario y un rol.
+		#Pawfinders
+		Route::get('paw', 'PawController@index'); 
+		Route::post('paw', 'PawController@create'); 
+		Route::get('paw/{id}', 'PawController@read'); 
+		Route::put('paw/{id}', 'PawController@update'); 
+		Route::delete('paw/{id}', 'PawController@delete'); 
 	});
 });
